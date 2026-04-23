@@ -1,5 +1,4 @@
-import React from 'react';
-import Footer from '../components/Layout/Footer';
+﻿import React from 'react';
 import AboutHero from '../components/About/AboutHero';
 import MissionVision from '../components/About/MissionVision';
 import CoreValues from '../components/About/CoreValues';
@@ -18,7 +17,6 @@ const AboutPage = ({ showPage }) => {
       <Timeline />
       <TechStack />
       <CTASection onContact={() => showPage('contact')} />
-      <Footer showPage={showPage} />
     </>
   );
 };

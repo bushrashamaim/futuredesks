@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import FeaturesPage from './pages/FeaturesPage';
@@ -6,6 +6,7 @@ import PortfolioPage from './pages/PortfolioPage';
 import TeamPage from './pages/TeamPage';
 import ContactPage from './pages/ContactPage';
 import Header from './components/Layout/Header';
+import Footer from './components/Layout/Footer';  // ← IMPORT KARO
 import AIChatButton from './components/AIChat/AIChatButton';
 import YouTubeModal from './components/Common/YouTubeModal';
 
@@ -53,6 +54,9 @@ function App() {
       <div className={`page ${activePage === 'contact' ? 'active' : ''}`}>
         <ContactPage showPage={showPage} />
       </div>
+
+      {/* Footer - Sab pages ke liye common */}
+      <Footer showPage={showPage} />
 
       <AIChatButton />
       <YouTubeModal isOpen={isYtModalOpen} onClose={closeYT} ytUrl={ytUrl} />

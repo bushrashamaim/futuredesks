@@ -1,5 +1,4 @@
-import React from 'react';
-import Footer from '../components/Layout/Footer';
+﻿import React from 'react';
 import PortfolioHero from '../components/Portfolio/PortfolioHero';
 import PortfolioGrid from '../components/Portfolio/PortfolioGrid';
 import ClientsSection from '../components/Portfolio/ClientsSection';
@@ -14,7 +13,6 @@ const PortfolioPage = ({ showPage, openYT }) => {
       <ClientsSection />
       <AwardsSection />
       <CTASection onContact={() => showPage('contact')} />
-      <Footer showPage={showPage} />
     </>
   );
 };

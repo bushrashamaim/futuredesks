@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import Footer from '../components/Layout/Footer';
+// import Footer from '../components/Layout/Footer';
 import Hero from '../components/Home/Hero';
 import AboutSection from '../components/Home/AboutSection';
 import FeaturesGrid from '../components/Home/FeaturesGrid';
@@ -21,7 +21,7 @@ const HomePage = ({ showPage, openYT }) => {
       <TeamSection />
       <FAQSection />
       <ContactForm />
-      <Footer showPage={showPage} />
+      {/* <Footer showPage={showPage} /> */}
     </>
   );
 };

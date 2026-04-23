@@ -1,5 +1,4 @@
-import React from 'react';
-import Footer from '../components/Layout/Footer';
+﻿import React from 'react';
 import FeaturesHero from '../components/Features/FeaturesHero';
 import ServicesGrid from '../components/Features/ServicesGrid';
 import ProcessSteps from '../components/Features/ProcessSteps';
@@ -18,7 +17,6 @@ const FeaturesPage = ({ showPage }) => {
       <WhyChooseUs />
       <SupportOptions />
       <CTASection onContact={() => showPage('contact')} />
-      <Footer showPage={showPage} />
     </>
   );
 };

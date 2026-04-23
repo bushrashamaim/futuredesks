@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from '../components/Layout/Footer';
 import ContactHero from '../components/Contact/ContactHero';
 import ContactInfo from '../components/Contact/ContactInfo';
 import ContactFormSection from '../components/Contact/ContactFormSection';
@@ -14,7 +13,6 @@ const ContactPage = ({ showPage }) => {
       <ContactFormSection />
       <ContactFAQ />
       <MapSection />
-      <Footer showPage={showPage} />
     </>
   );
 };
