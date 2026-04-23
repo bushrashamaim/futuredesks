@@ -2,11 +2,7 @@
 
 const Testimonials = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  
-  const scrollRef = useRef(null);
+  const trackRef = useRef(null);
   const containerRef = useRef(null);
 
   const testimonials = [
@@ -28,90 +24,24 @@ const Testimonials = () => {
 
   const totalPages = useCallback(() => {
     return Math.ceil(testimonials.length / getCardsPerPage());
-  }, [getCardsPerPage]);
+  }, [getCardsPerPage, testimonials.length]);
 
-  const scrollToPage = useCallback((page) => {
-    if (!scrollRef.current) return;
+  const updateTrack = useCallback(() => {
+    if (!trackRef.current || !containerRef.current) return;
     const pp = getCardsPerPage();
-    const cards = document.querySelectorAll('.testi-card');
-    if (cards.length > 0) {
-      const cardWidth = cards[0].offsetWidth;
-      const gap = 24;
-      const scrollAmount = page * pp * (cardWidth + gap);
-      scrollRef.current.scrollTo({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  }, [getCardsPerPage]);
-
-  const handleDotClick = (page) => {
-    setCurrentPage(page);
-    scrollToPage(page);
-  };
-
-  // Update current page based on scroll position
-  const updateCurrentPage = useCallback(() => {
-    if (!scrollRef.current) return;
-    const pp = getCardsPerPage();
-    const cards = document.querySelectorAll('.testi-card');
-    if (cards.length > 0) {
-      const cardWidth = cards[0].offsetWidth;
-      const gap = 24;
-      const scrollPosition = scrollRef.current.scrollLeft;
-      const pageWidth = pp * (cardWidth + gap);
-      const newPage = Math.round(scrollPosition / pageWidth);
-      setCurrentPage(Math.min(newPage, totalPages() - 1));
-    }
-  }, [getCardsPerPage, totalPages]);
+    const gap = pp === 1 ? 16 : 24;
+    const cardW = (containerRef.current.offsetWidth - gap * (pp - 1)) / pp;
+    trackRef.current.style.transform = `translateX(-${currentPage * pp * (cardW + gap)}px)`;
+  }, [currentPage, getCardsPerPage]);
 
   useEffect(() => {
-    const scrollElement = scrollRef.current;
-    if (scrollElement) {
-      scrollElement.addEventListener('scroll', updateCurrentPage);
-      return () => scrollElement.removeEventListener('scroll', updateCurrentPage);
-    }
-  }, [updateCurrentPage]);
+    updateTrack();
+    window.addEventListener('resize', updateTrack);
+    return () => window.removeEventListener('resize', updateTrack);
+  }, [updateTrack]);
 
-  useEffect(() => {
-    scrollToPage(currentPage);
-  }, [currentPage, scrollToPage]);
-
-  // Mouse Drag Events
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.pageX - scrollRef.current.offsetLeft);
-    setScrollLeft(scrollRef.current.scrollLeft);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    scrollRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  // Touch Events
-  const handleTouchStart = (e) => {
-    setIsDragging(true);
-    setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
-    setScrollLeft(scrollRef.current.scrollLeft);
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isDragging) return;
-    const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    scrollRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
+  const goToPage = (idx) => {
+    setCurrentPage(Math.max(0, Math.min(idx, totalPages() - 1)));
   };
 
   return (
@@ -120,46 +50,10 @@ const Testimonials = () => {
       <div className="section-title">
         Happy Clients<br /><span className="muted">What They Say</span>
       </div>
-      
-      <div 
-        ref={containerRef}
-        style={{ width: '100%' }}
-      >
-        <div 
-          ref={scrollRef}
-          style={{
-            overflowX: 'auto',
-            overflowY: 'hidden',
-            display: 'flex',
-            gap: '24px',
-            scrollBehavior: 'smooth',
-            cursor: isDragging ? 'grabbing' : 'grab',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none'
-          }}
-          className="hide-scrollbar"
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
+      <div className="testi-viewport" ref={containerRef}>
+        <div className="testi-track" ref={trackRef}>
           {testimonials.map((t, idx) => (
-            <div 
-              key={idx} 
-              className="testi-card"
-              style={{
-                background: '#fff',
-                border: '1px solid var(--gray-100)',
-                borderRadius: '14px',
-                padding: '28px',
-                minWidth: '300px',
-                maxWidth: '350px',
-                flex: '0 0 auto'
-              }}
-            >
+            <div className="testi-card" key={idx}>
               <div className="testi-stars">{'★'.repeat(t.stars)}</div>
               <p className="testi-text">"{t.text}"</p>
               <div className="testi-author">
@@ -173,43 +67,11 @@ const Testimonials = () => {
           ))}
         </div>
       </div>
-      
       <div className="dot-nav">
         {[...Array(totalPages())].map((_, idx) => (
-          <button 
-            key={idx} 
-            className={`dot ${currentPage === idx ? 'active' : ''}`} 
-            onClick={() => handleDotClick(idx)}
-          ></button>
+          <button key={idx} className={`dot ${currentPage === idx ? 'active' : ''}`} onClick={() => goToPage(idx)}></button>
         ))}
       </div>
-
-      <style>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .testi-card {
-          flex: 0 0 auto;
-        }
-        @media (max-width: 700px) {
-          .testi-card {
-            min-width: calc(100% - 32px);
-            max-width: calc(100% - 32px);
-          }
-        }
-        @media (min-width: 701px) and (max-width: 1000px) {
-          .testi-card {
-            min-width: calc(50% - 40px);
-            max-width: calc(50% - 40px);
-          }
-        }
-        @media (min-width: 1001px) {
-          .testi-card {
-            min-width: calc(33.333% - 40px);
-            max-width: calc(33.333% - 40px);
-          }
-        }
-      `}</style>
     </div>
   );
 };
