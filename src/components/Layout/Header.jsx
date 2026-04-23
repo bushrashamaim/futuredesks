@@ -66,11 +66,13 @@ const Header = ({ activePage, showPage }) => {
           <button onClick={(e) => handleNavClick('team', e)} className={activePage === 'team' ? 'active' : ''} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 500, paddingBottom: '4px' }}>Team</button>
           <button onClick={(e) => handleNavClick('contact', e)} className="nav-cta">Contact Us</button>
         </div>
-        <div className="three-dot" onClick={toggleMenu} ref={btnRef}>
-          <div className="three-dot-icon">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
+<div className="hamburger-icon" onClick={toggleMenu} ref={btnRef}>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 12H21" stroke="#0a0a0a" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M3 6H21" stroke="#0a0a0a" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M3 18H21" stroke="#0a0a0a" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+</div>
       </nav>
 
       <MobileMenu isOpen={isMobileMenuOpen} onClose={closeMenu} showPage={showPage} ref={menuRef} />

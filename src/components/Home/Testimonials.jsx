@@ -1,9 +1,10 @@
-﻿import React, { useState, useEffect, useRef, useCallback } from 'react';
+﻿import React, { useRef } from 'react';
 
 const Testimonials = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const trackRef = useRef(null);
-  const containerRef = useRef(null);
+  const scrollRef = useRef(null);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [startX, setStartX] = React.useState(0);
+  const [scrollLeft, setScrollLeft] = React.useState(0);
 
   const testimonials = [
     { name: "Rahul Mehta", role: "LalSweets", text: "FutureDesks delivered our e-commerce site in record time. Outstanding attention to detail!", img: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=80&h=80&fit=crop", stars: 5 },
@@ -14,34 +15,41 @@ const Testimonials = () => {
     { name: "Amit Patel", role: "PetPals", text: "Professional, responsive, and highly skilled. Highly recommended for any web project!", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop", stars: 5 }
   ];
 
-  const getCardsPerPage = useCallback(() => {
-    if (!containerRef.current) return 3;
-    const w = containerRef.current.offsetWidth;
-    if (w <= 700) return 1;
-    if (w <= 1000) return 2;
-    return 3;
-  }, []);
+  // Mouse Drag Events
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
 
-  const totalPages = useCallback(() => {
-    return Math.ceil(testimonials.length / getCardsPerPage());
-  }, [getCardsPerPage, testimonials.length]);
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
 
-  const updateTrack = useCallback(() => {
-    if (!trackRef.current || !containerRef.current) return;
-    const pp = getCardsPerPage();
-    const gap = pp === 1 ? 16 : 24;
-    const cardW = (containerRef.current.offsetWidth - gap * (pp - 1)) / pp;
-    trackRef.current.style.transform = `translateX(-${currentPage * pp * (cardW + gap)}px)`;
-  }, [currentPage, getCardsPerPage]);
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
 
-  useEffect(() => {
-    updateTrack();
-    window.addEventListener('resize', updateTrack);
-    return () => window.removeEventListener('resize', updateTrack);
-  }, [updateTrack]);
+  // Touch Events for Mobile
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
 
-  const goToPage = (idx) => {
-    setCurrentPage(Math.max(0, Math.min(idx, totalPages() - 1)));
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
   };
 
   return (
@@ -50,28 +58,78 @@ const Testimonials = () => {
       <div className="section-title">
         Happy Clients<br /><span className="muted">What They Say</span>
       </div>
-      <div className="testi-viewport" ref={containerRef}>
-        <div className="testi-track" ref={trackRef}>
-          {testimonials.map((t, idx) => (
-            <div className="testi-card" key={idx}>
-              <div className="testi-stars">{'★'.repeat(t.stars)}</div>
-              <p className="testi-text">"{t.text}"</p>
-              <div className="testi-author">
-                <img src={t.img} alt={t.name} />
-                <div>
-                  <div className="name">{t.name}</div>
-                  <div className="role">{t.role}</div>
-                </div>
+      
+      <div 
+        ref={scrollRef}
+        style={{
+          overflowX: 'auto',
+          overflowY: 'hidden',
+          display: 'flex',
+          gap: '24px',
+          scrollBehavior: 'smooth',
+          cursor: isDragging ? 'grabbing' : 'grab',
+          scrollbarWidth: 'thin',
+          paddingBottom: '10px'
+        }}
+        className="testimonials-scroll"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {testimonials.map((t, idx) => (
+          <div 
+            key={idx} 
+            style={{
+              background: '#fff',
+              border: '1px solid var(--gray-100)',
+              borderRadius: '14px',
+              padding: '28px',
+              minWidth: '300px',
+              maxWidth: '350px',
+              flex: '0 0 auto',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+            }}
+          >
+            <div style={{ color: '#f59e0b', fontSize: '14px', marginBottom: '12px', letterSpacing: '2px' }}>
+              {'★'.repeat(t.stars)}
+            </div>
+            <p style={{ fontSize: '14px', lineHeight: '1.7', color: 'var(--gray-600)', marginBottom: '20px' }}>
+              "{t.text}"
+            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+              <img src={t.img} alt={t.name} style={{ width: '45px', height: '45px', borderRadius: '50%', objectFit: 'cover' }} />
+              <div>
+                <div style={{ fontFamily: 'Syne, sans-serif', fontSize: '14px', fontWeight: 700 }}>{t.name}</div>
+                <div style={{ fontSize: '12px', color: 'var(--gray-600)' }}>{t.role}</div>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="dot-nav">
-        {[...Array(totalPages())].map((_, idx) => (
-          <button key={idx} className={`dot ${currentPage === idx ? 'active' : ''}`} onClick={() => goToPage(idx)}></button>
+          </div>
         ))}
       </div>
+
+      <style>{`
+        .testimonials-scroll::-webkit-scrollbar {
+          height: 6px;
+        }
+        .testimonials-scroll::-webkit-scrollbar-track {
+          background: var(--gray-100);
+          border-radius: 10px;
+        }
+        .testimonials-scroll::-webkit-scrollbar-thumb {
+          background: var(--accent);
+          border-radius: 10px;
+        }
+        @media (max-width: 700px) {
+          .testimonials-scroll > div {
+            min-width: calc(100% - 40px);
+            max-width: calc(100% - 40px);
+          }
+        }
+      `}</style>
     </div>
   );
 };

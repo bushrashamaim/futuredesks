@@ -2126,3 +2126,32 @@ footer {
   height: 20px;
   display: block;
 }
+/* Hamburger Icon */
+.hamburger-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  transition: all 0.3s ease;
+}
+
+.hamburger-icon:hover {
+  background: var(--gray-100);
+  transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+  .hamburger-icon {
+    display: none !important;
+  }
+}
+
+.hamburger-icon svg {
+  width: 20px;
+  height: 20px;
+}
