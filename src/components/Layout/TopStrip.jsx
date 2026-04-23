@@ -19,7 +19,7 @@ const TopStrip = () => {
       
       <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
         <a 
-          href="https://www.instagram.com/futuredesks_podcast/" 
+          href="https://www.instagram.com/aindexcc/" 
           target="_blank" 
           rel="noreferrer"
           style={{ color: '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}
@@ -29,7 +29,7 @@ const TopStrip = () => {
         </a>
         
         <a 
-          href="https://wa.me/+918595669310" 
+          href="https://wa.me/+447916693244" 
           target="_blank" 
           rel="noreferrer"
           style={{ color: '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}

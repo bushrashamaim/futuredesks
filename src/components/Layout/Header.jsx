@@ -35,7 +35,7 @@ const Header = ({ activePage, showPage }) => {
         </div>
         <div className="social-icons">
           {/* INSTAGRAM LOGO - DIRECT IMAGE */}
-          <a href="https://www.instagram.com/futuredesks_podcast/" target="_blank" rel="noreferrer">
+          <a href="https://www.instagram.com/aindexcc/" target="_blank" rel="noreferrer">
             <img 
               src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" 
               alt="Instagram" 
@@ -45,7 +45,7 @@ const Header = ({ activePage, showPage }) => {
           </a>
           
           {/* WHATSAPP LOGO - DIRECT IMAGE */}
-          <a href="https://wa.me/+918595669310" target="_blank" rel="noreferrer">
+          <a href="https://wa.me/+447916693244" target="_blank" rel="noreferrer">
             <img 
               src="https://cdn-icons-png.flaticon.com/512/733/733585.png" 
               alt="WhatsApp" 
@@ -57,7 +57,7 @@ const Header = ({ activePage, showPage }) => {
       </div>
 
       <nav>
-        <div className="nav-logo" onClick={() => showPage('home')}>FutureDesks</div>
+        <div className="nav-logo" onClick={() => showPage('home')}>Aindexc</div>
         <div className="nav-links">
           <button onClick={(e) => handleNavClick('home', e)} className={activePage === 'home' ? 'active' : ''} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 500, paddingBottom: '4px' }}>Home</button>
           <button onClick={(e) => handleNavClick('about', e)} className={activePage === 'about' ? 'active' : ''} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 500, paddingBottom: '4px' }}>About</button>

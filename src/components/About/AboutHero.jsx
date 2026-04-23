@@ -7,7 +7,7 @@ const AboutHero = () => {
       <div className="hero-overlay"></div>
       <div className="hero-content">
         <div className="hero-badge">✦ <span>Know Us Better</span></div>
-        <h1>About <span className="accent">FutureDesks</span></h1>
+        <h1>About <span className="accent">Aindexc</span></h1>
         <p>We are on a mission to transform businesses through innovative digital solutions.</p>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 const Timeline = () => {
   const events = [
@@ -13,7 +13,7 @@ const Timeline = () => {
   return (
     <div className="sec">
       <div className="section-label">Our Journey</div>
-      <div className="section-title">The FutureDesks <span className="muted">Timeline</span></div>
+      <div className="section-title">The Aindexc <span className="muted">Timeline</span></div>
       <div className="timeline">
         {events.map((e, idx) => (
           <div className="timeline-item" key={idx}>

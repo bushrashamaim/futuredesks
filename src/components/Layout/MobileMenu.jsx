@@ -33,12 +33,12 @@ const MobileMenu = forwardRef(({ isOpen, onClose, showPage }, ref) => {
 
   return (
     <div className={`mobile-menu ${isOpen ? 'open' : ''}`} ref={ref}>
-      <button onClick={(e) => handleClick('home', e)}>🏠 Home</button>
-      <button onClick={(e) => handleClick('about', e)}>📖 About</button>
-      <button onClick={(e) => handleClick('features', e)}>⚙️ Features</button>
-      <button onClick={(e) => handleClick('portfolio', e)}>📁 Projects</button>
-      <button onClick={(e) => handleClick('team', e)}>👥 Team</button>
-      <button onClick={(e) => handleClick('contact', e)} className="mobile-cta">📞 Contact Us</button>
+      <button onClick={(e) => handleClick('home', e)}> Home</button>
+      <button onClick={(e) => handleClick('about', e)}>About</button>
+      <button onClick={(e) => handleClick('features', e)}>Features</button>
+      <button onClick={(e) => handleClick('portfolio', e)}>Projects</button>
+      <button onClick={(e) => handleClick('team', e)}>Team</button>
+      <button onClick={(e) => handleClick('contact', e)} className="mobile-cta">Contact Us</button>
     </div>
   );
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 const AboutSection = () => {
   return (
@@ -9,8 +9,8 @@ const AboutSection = () => {
       </div>
       <div className="about-content">
         <p>
-          FutureDesks is a leading digital solutions provider specializing in
-          website development, mobile apps, and SaaS products. Founded in 2020,
+          Aindexc is a leading digital solutions provider specializing in
+          website development, mobile apps, and SaaS products. Founded in 2025,
           we've helped over 200+ businesses transform their ideas into powerful
           digital experiences.
         </p>

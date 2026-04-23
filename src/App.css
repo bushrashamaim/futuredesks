@@ -1032,6 +1032,18 @@ nav {
   margin-bottom: 16px;
   font-size: 14px;
 }
+/* Contact Page Section Title */
+.contact-wrap .section-title {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(28px, 6vw, 48px);
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.contact-info h3 {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+}
 
 .contact-detail .icon {
   width: 40px;

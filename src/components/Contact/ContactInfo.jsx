@@ -2,10 +2,9 @@ import React from 'react';
 
 const ContactInfo = () => {
   const contacts = [
-    { icon: "📧", title: "Email Us", details: ["partnerships@futuredesks.in", "support@futuredesks.in"] },
-    { icon: "📞", title: "Call Us", details: ["+91 85956 69310", "+91 98765 43210"] },
-    { icon: "📍", title: "Visit Us", details: ["Noida, Uttar Pradesh", "India - 201301"] }
-  ];
+    { icon: "📧", title: "Email Us", details: ["zunairshahid@gmail.com"] },
+    { icon: "📞", title: "Call Us", details: ["+44 7916 693244"] },
+{ icon: "📍", title: "Visit Us", details: ["London, United Kingdom", "Bahawalpur, Pakistan"] }  ];
 
   return (
     <div className="sec" style={{ background: 'var(--gray-50)' }}>

@@ -34,11 +34,11 @@ const ContactFormSection = () => {
           <p>Share your idea with us — we'll build an amazing digital product together.</p>
           <div className="contact-detail">
             <div className="icon">📧</div>
-            <div><strong>Email</strong><br /><a href="mailto:partnerships@futuredesks.in" style={{ color: 'var(--accent)' }}>partnerships@futuredesks.in</a></div>
+            <div><strong>Email</strong><br /><a href="mailto:zunairshahid@gmail.com" style={{ color: 'var(--accent)' }}>zunairshahid@gmail.com</a></div>
           </div>
           <div className="contact-detail">
             <div className="icon">📞</div>
-            <div><strong>WhatsApp</strong><br /><a href="https://wa.me/+918595669310" style={{ color: 'var(--accent)' }}>+91 85956 69310</a></div>
+            <div><strong>WhatsApp</strong><br /><a href="https://wa.me/+447916693244" style={{ color: 'var(--accent)' }}>+447916693244</a></div>
           </div>
           <div className="contact-detail">
             <div className="icon">⏰</div>
@@ -48,7 +48,7 @@ const ContactFormSection = () => {
         <div>
           <div className="form-row">
             <div className="form-group"><label>Your Name *</label><input type="text" id="name" value={formData.name} onChange={handleChange} placeholder="e.g., Rahul Mehta" /></div>
-            <div className="form-group"><label>Phone Number</label><input type="tel" id="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" /></div>
+            <div className="form-group"><label>Phone Number</label><input type="tel" id="phone" value={formData.phone} onChange={handleChange} placeholder="+44 7916 693244" /></div>
           </div>
           <div className="form-group"><label>Email Address *</label><input type="email" id="email" value={formData.email} onChange={handleChange} placeholder="you@company.com" /></div>
           <div className="form-group"><label>Service Required</label><select id="service" value={formData.service} onChange={handleChange}>

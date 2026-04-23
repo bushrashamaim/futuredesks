@@ -12,7 +12,7 @@ const TeamPage = ({ showPage }) => {
       <TeamMembers />
       <CareersSection />
       <BenefitsSection />
-      <CTASection onContact={() => alert('📧 Send your resume to careers@futuredesks.in')} />
+      <CTASection onContact={() => alert('📧 Send your resume to zunairshahid@gmail.com')} />
     </>
   );
 };

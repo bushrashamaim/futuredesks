@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 
 const AIChatButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +46,7 @@ const AIChatButton = () => {
       
       <div className="ai-chat-window" style={{ display: isOpen ? 'flex' : 'none' }}>
         <div className="ai-chat-header">
-          <span>🤖 FutureDesks AI</span>
+          <span>🤖 Aindexc AI</span>
           <button onClick={toggleChat}>✕</button>
         </div>
         <div className="ai-chat-messages">

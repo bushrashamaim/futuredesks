@@ -20,11 +20,11 @@ const Footer = ({ showPage }) => {
     <footer>
       <div className="footer-top">
         <div>
-          <div className="footer-logo">FUTUREDESKS</div>
+          <div className="footer-logo">AINDEXC</div>
           <p className="footer-desc">We design & develop websites and mobile apps. 200+ projects delivered globally.</p>
           <div className="footer-social">
             {/* INSTAGRAM LOGO */}
-            <a href="https://www.instagram.com/futuredesks_podcast/" target="_blank" rel="noreferrer">
+            <a href="https://www.instagram.com/aindexcc/" target="_blank" rel="noreferrer">
               <img 
                 src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" 
                 alt="Instagram" 
@@ -34,7 +34,7 @@ const Footer = ({ showPage }) => {
             </a>
             
             {/* WHATSAPP LOGO */}
-            <a href="https://wa.me/+918595669310" target="_blank" rel="noreferrer">
+            <a href="https://wa.me/+447916693244" target="_blank" rel="noreferrer">
               <img 
                 src="https://cdn-icons-png.flaticon.com/512/733/733585.png" 
                 alt="WhatsApp" 
@@ -69,7 +69,7 @@ const Footer = ({ showPage }) => {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>© 2025 FutureDesks. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <p>© 2025 Aindexc. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
       </div>
     </footer>
   );
