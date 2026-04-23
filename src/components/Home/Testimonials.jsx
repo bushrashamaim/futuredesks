@@ -15,7 +15,6 @@ const Testimonials = () => {
     { name: "Amit Patel", role: "PetPals", text: "Professional, responsive, and highly skilled. Highly recommended for any web project!", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop", stars: 5 }
   ];
 
-  // Mouse Drag Events
   const handleMouseDown = (e) => {
     setIsDragging(true);
     setStartX(e.pageX - scrollRef.current.offsetLeft);
@@ -34,7 +33,6 @@ const Testimonials = () => {
     setIsDragging(false);
   };
 
-  // Touch Events for Mobile
   const handleTouchStart = (e) => {
     setIsDragging(true);
     setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
@@ -68,10 +66,10 @@ const Testimonials = () => {
           gap: '24px',
           scrollBehavior: 'smooth',
           cursor: isDragging ? 'grabbing' : 'grab',
-          scrollbarWidth: 'thin',
-          paddingBottom: '10px'
+          paddingBottom: '10px',
+          msOverflowStyle: 'none',
+          scrollbarWidth: 'none'
         }}
-        className="testimonials-scroll"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -113,15 +111,7 @@ const Testimonials = () => {
 
       <style>{`
         .testimonials-scroll::-webkit-scrollbar {
-          height: 6px;
-        }
-        .testimonials-scroll::-webkit-scrollbar-track {
-          background: var(--gray-100);
-          border-radius: 10px;
-        }
-        .testimonials-scroll::-webkit-scrollbar-thumb {
-          background: var(--accent);
-          border-radius: 10px;
+          display: none;
         }
         @media (max-width: 700px) {
           .testimonials-scroll > div {
